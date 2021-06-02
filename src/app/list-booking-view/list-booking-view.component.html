@@ -1,0 +1,10 @@
+<div class="row mt-5 mb-3 pt">
+  <div class="text-center col-12">
+      <h2>Rendez-vous à venir</h2>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <app-list-booking *ngFor="let booking of bookings; let i = index" [indexOfBooking]="i" [idBooking]="booking.idBooking" [firstNameCustomer]="booking[0].firstNameCustomer" [lastNameCustomer]="booking[0].lastNameCustomer" [phoneCustomer]="booking[0].phoneCustomer" [licensePlateCar]="booking[1].licensePlateCar" [brandCar]="booking[1].brandCar" [modelCar]="booking[1].modelCar" [dateOfCirculationCar]="booking[1].dateOfCirculationCar" [motorizationCar]="booking[1].motorizationCar" [dateForth]="booking.dateForth" [hoursForth]="booking.hoursForth" [dateOfBirthdayCustomer]="booking[0].dateOfBirthdayCustomer" [mailCustomer]="booking[0].mailCustomer" [urlGrayCard]="booking[1].urlGrayCard" [dateBack]="booking.dateBack"></app-list-booking>
+</div>
+

@@ -1,0 +1,47 @@
+<div class="row mt-5 mb-5">
+  <div class="col-12 text-center">
+      <h2>Ajout d'une facture</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div *ngIf="uploadResponse && uploadResponse.status === 'error'">
+
+  </div>
+  <div *ngIf="uploadResponse && uploadResponse.status === 'success'">
+    <img [src]='uploadResponse.url' />
+  </div>
+
+  <form class="col-10 offset-1" enctype="multipart/form-data" [formGroup]="billingForm" (ngSubmit)="onSubmit()">
+    <div class="row d-flex flex-column">
+      <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-4">
+            <label for="monthlyInvoice">Mois de la facture</label>
+            <input required type="text" class="validate" id="monthlyInvoice" formControlName="monthlyInvoice">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-4">
+            <label for="priceInvoice">Montant de la facture</label>
+            <input required type="text" class="validate" id="priceInvoice" formControlName="priceInvoice">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-4">
+            <label for="filenameTechnicalControlInvoice">Adresse de l'agence</label>
+            <input type="file" name="filenameTechnicalControlInvoice" (change)="onFileSelect($event)" />
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+      </div>
+    </div>
+    <div class="mt-5 mb-5 text-center">
+      <button class="m-auto" id="btn" type="submit" [disabled]="billingForm.invalid">Ajouter une facture</button>
+    </div>
+  </form>
+</div>
+
+

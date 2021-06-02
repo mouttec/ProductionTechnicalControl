@@ -1,0 +1,64 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { BillingService } from 'src/app/services/billing.service';
+import { Billing } from 'src/app/models/billing.model';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-billing-forms',
+  templateUrl: './billing-forms.component.html',
+  styleUrls: ['./billing-forms.component.css']
+})
+export class BillingFormsComponent implements OnInit {
+
+  billingForm: FormGroup;
+  uploadResponse;
+  billings: Billing[];
+  billingSubscription: Subscription;
+  idPartner = JSON.parse(localStorage.getItem('idPartner'));
+
+
+  constructor(private formBuilder: FormBuilder, private billingService: BillingService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.billingSubscription = this.billingService.billingSubject.subscribe(
+      (billings: Billing[]) => {
+        this.billings = billings;
+      }
+    );
+    this.billingService.emitBillingSubject();
+    this.initFormBilling();
+  }
+
+  initFormBilling() {
+    this.billingForm = this.formBuilder.group({
+      idTechnicalControlInvoices: '',
+      monthlyInvoice: ['', Validators.required],
+      priceInvoice: ['', Validators.required],
+      filenameTechnicalControlInvoice: [''],
+      urlInvoiceSource: ['']
+    });
+  }
+
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.billingForm.patchValue({
+        urlInvoiceSource: file
+      })
+    }
+  }
+
+  onSubmit() {
+    console.log(1111);
+    const newBilling = new Billing();
+    newBilling.idPartner = this.idPartner;
+    newBilling.monthlyInvoice = this.billingForm.value.monthlyInvoice;
+    newBilling.priceInvoice = this.billingForm.value.priceInvoice;
+    newBilling.filenameTechnicalControlInvoice = this.billingForm.value.urlInvoiceSource.name;
+    console.log(newBilling);
+    this.billingService.addBilling(newBilling);
+    this.router.navigate(['/facture']);
+  }
+}

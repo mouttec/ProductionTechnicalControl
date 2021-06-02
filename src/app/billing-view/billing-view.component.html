@@ -1,0 +1,15 @@
+<div class="row mt-5 mb-5 pt-5">
+  <div class="text-center col-9">
+      <h2>Facture de l'année</h2>
+  </div>
+  <div class="text-right col-3">
+    <div class="text-right">
+      <button style="font-size: 15px;" routerLink="/addFacture">Ajouter une facture</button>
+  </div>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <app-billing *ngFor="let billing of billings; let i = index" [IndexOfBilling]="i" [idBilling]="billing.idBilling" [monthlyInvoice]="billing.monthlyInvoice" [priceInvoice]="billing.priceInvoice" [urlInvoice]="billing.urlInvoice"></app-billing>
+</div>
+
