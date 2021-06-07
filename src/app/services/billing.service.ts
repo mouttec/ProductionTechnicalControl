@@ -32,7 +32,7 @@ export class BillingService {
   }
 
   addBilling(billing: Billing) {
-    this.httpClient.post(`${this.baseUrl}/editInvoices.php`, billing).subscribe(
+    this.httpClient.post(`http://localhost:8888/MoutteCAPI/backend/api/car/editCar.php`, billing).subscribe(
       () => {
         this.billings.push(billing)
       },
@@ -40,5 +40,6 @@ export class BillingService {
         console.log('erreur de sauvegarde de la facture', + error);
       }
     );
+    // return this.httpClient.post(`http://localhost:8888/MoutteCAPI/backend/api/car/editCar.php`, billing);
   }
 }

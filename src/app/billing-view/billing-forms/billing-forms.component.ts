@@ -36,8 +36,7 @@ export class BillingFormsComponent implements OnInit {
       idTechnicalControlInvoices: '',
       monthlyInvoice: ['', Validators.required],
       priceInvoice: ['', Validators.required],
-      filenameTechnicalControlInvoice: [''],
-      urlInvoiceSource: ['']
+      saveName: ['']
     });
   }
 
@@ -46,7 +45,10 @@ export class BillingFormsComponent implements OnInit {
       const file = event.target.files[0];
       this.billingForm.patchValue({
         urlInvoiceSource: file
-      })
+      });
+      console.log(this.billingForm.patchValue({
+        urlInvoice: file
+      }))
     }
   }
 
@@ -56,9 +58,9 @@ export class BillingFormsComponent implements OnInit {
     newBilling.idPartner = this.idPartner;
     newBilling.monthlyInvoice = this.billingForm.value.monthlyInvoice;
     newBilling.priceInvoice = this.billingForm.value.priceInvoice;
-    newBilling.filenameTechnicalControlInvoice = this.billingForm.value.urlInvoiceSource.name;
-    console.log(newBilling);
+    newBilling.saveName = this.billingForm.value.urlInvoiceSource;
     this.billingService.addBilling(newBilling);
     this.router.navigate(['/facture']);
+    return this.billingService.addBilling(newBilling);
   }
 }
