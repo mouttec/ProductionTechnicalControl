@@ -9,7 +9,7 @@ import { Billing } from 'src/app/models/billing.model';
 export class BillingService {
 
   billingSubject = new Subject<Billing[]>();
-  baseUrl =  'http://localhost:8888/MoutteCAPI/backend/api/technicalControlInvoices';
+  baseUrl =  '../backend/api/technicalControlInvoices';
   private billings: Billing[];
 
   constructor(private httpClient: HttpClient) { }
@@ -32,7 +32,7 @@ export class BillingService {
   }
 
   addBilling(billing: Billing) {
-    this.httpClient.post(`http://localhost:8888/MoutteCAPI/backend/api/car/editCar.php`, billing).subscribe(
+    this.httpClient.post(`../backend/api/car/editCar.php`, billing).subscribe(
       () => {
         this.billings.push(billing)
       },

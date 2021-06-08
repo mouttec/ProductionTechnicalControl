@@ -9,7 +9,7 @@ import { Booking } from '../models/bookings.model';
 export class BookingService {
 
   bookingSubject = new Subject<Booking[]>();
-  api = 'http://localhost:8888/MoutteCAPI/backend/api/booking/listBooking.php';
+  api = '../backend/api/booking/listBooking.php';
   private bookings: Booking[];
 
   constructor(private httpClient: HttpClient) { }
